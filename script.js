@@ -20,8 +20,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         console.log('Disconnected from WebSocket server');
         console.log('Code:', event.code, 'Reason:', event.reason);
         statusMessage.textContent = "Desconectado.";
-        connectButton.classList.add('hidden');
-        connectButton.style.display = 'none'; // Oculta o botão
         sendButton.classList.add('hidden');
         sendButton.style.display = 'none'; // Oculta o botão
     };
