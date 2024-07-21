@@ -1,33 +1,41 @@
 import asyncio
-import json
 import websockets
+import json
 
-connected_clients = set()
 
-async def handler(websocket, path):
-    connected_clients.add(websocket)
+# Lista de clientes conectados:
+connected = set()
+
+    
+# Comportamento principal do Servidor:
+async def server(ws, path):
+    # Registrar cliente:
+    connected.add(ws)
+    print(f"Novo Cliente Conectado: {ws.remote_address}")
+
+    # Controlar mensagens recebidas:
     try:
-        async for message in websocket:
-            # Sinalizar que uma mensagem foi recebida
-            print(f"Received message: {message}")
-            
-            # Enviar uma confirmação de volta ao cliente
-            response = {"status": "received", "message": message}
-            await websocket.send(json.dumps(response))
+        # Enviar mensagem para todos os clientes conectados:
+        async for msg in ws:
+            print("MSG DO CLIENTE: " + str(msg))
+            for conn in connected:
+                if conn != ws:
+                    print("Enviada para o cliente: " + str(conn.remote_address))
+                    await conn.send(msg)
 
-            # Distribuir a mensagem para todos os clientes conectados
-            await asyncio.gather(
-                *[client.send(message) for client in connected_clients]
-            )
-    except websockets.exceptions.ConnectionClosed as e:
-        print(f"Client disconnected: {e}")
+                    # Obter tipo de Pacote:
+                    # data = json.loads(str(msg))
     finally:
-        connected_clients.remove(websocket)
-        print("É impressão minha ou foi removido o cliente?")
+        # Unregister:
+        connected.remove(ws)
+        print(f"Cliente Desconectado: {ws.remote_address}")
 
-async def main():
-    async with websockets.serve(handler, "0.0.0.0", 10000):
-        await asyncio.Future()  # Run forever
+
+def main():
+    start_server = websockets.serve(server, "", 4999)
+    asyncio.get_event_loop().run_until_complete(start_server)
+    asyncio.get_event_loop().run_forever()
+
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()
