@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 const sendButton = document.getElementById('sendButton');
 const statusMessage = document.getElementById('statusMessage');
 
-const ws = new WebSocket('wss://onebuttonserver.onrender.com:10000');
+const ws = new WebSocket('wss://onebuttonserver.onrender.com:4999');
 // const ws = new WebSocket('ws://localhost:5569');
 
 // Conexão Aberta
