@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     const connectButton = document.getElementById('connectButton');
 
-    const ws = new WebSocket("ws://onebuttonserver.onrender.com:5569");
+    const ws = new WebSocket("wss://onebuttonserver.onrender.com:5569");
 
     ws.onopen = () => {
         console.log('Connected to WebSocket server');
