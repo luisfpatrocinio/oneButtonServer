@@ -3,7 +3,7 @@ const joinButton = document.getElementById('joinButton');
 const playerIdElement = document.getElementById('playerId');
 const connectedPlayersElement = document.getElementById('connectedPlayers');
 const sendButton = document.getElementById('sendButton');
-const ws = new WebSocket('wss://onebuttonserver.onrender.com:10000');
+const ws = new WebSocket('wss://onebuttonserver.onrender.com/:10000');
 // const ws = new WebSocket('ws://localhost:10000');
 
 ws.onopen = () => {
