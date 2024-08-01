@@ -1,8 +1,9 @@
 const statusMessage = document.getElementById('statusMessage');
+const joinButton = document.getElementById('joinButton');
 const playerIdElement = document.getElementById('playerId');
 const connectedPlayersElement = document.getElementById('connectedPlayers');
 const sendButton = document.getElementById('sendButton');
-const ws = new WebSocket('wss://onebuttonserver.onrender.com/:10000');
+const ws = new WebSocket('wss://onebuttonserver.onrender.com:10000');
 // const ws = new WebSocket('ws://localhost:10000');
 
 ws.onopen = () => {
@@ -16,6 +17,7 @@ ws.onerror = (error) => {
 
 ws.onclose = () => {
     statusMessage.textContent = 'Conexão fechada';
+    joinButton.classList.add('hidden');
     sendButton.classList.add('hidden');
     playerIdElement.classList.add('hidden');
     connectedPlayersElement.classList.add('hidden');
@@ -29,9 +31,17 @@ ws.onmessage = (event) => {
         playerIdElement.classList.remove('hidden');
         connectedPlayersElement.classList.remove('hidden');
         sendButton.classList.remove('hidden');
+        joinButton.classList.add('hidden');
     } else if (message.type === 'update') {
         connectedPlayersElement.textContent = `Jogadores Conectados: ${message.connectedPlayers}`;
     }
+};
+
+joinButton.onclick = () => {
+    const joinMessage = {
+        type: 'join'
+    };
+    ws.send(JSON.stringify(joinMessage));
 };
 
 sendButton.onclick = () => {
