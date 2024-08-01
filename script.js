@@ -1,45 +1,43 @@
-document.addEventListener('DOMContentLoaded', (event) => {
-
-}
-);
-
-const sendButton = document.getElementById('sendButton');
 const statusMessage = document.getElementById('statusMessage');
+const playerIdElement = document.getElementById('playerId');
+const connectedPlayersElement = document.getElementById('connectedPlayers');
+const sendButton = document.getElementById('sendButton');
+const ws = new WebSocket('wss://onebuttonserver.onrender.com:10000/');
+// const ws = new WebSocket('ws://localhost:10000');
 
-const ws = new WebSocket('wss://onebuttonserver.onrender.com:10000');
-// const ws = new WebSocket('ws://localhost:5569');
-
-// Conexão Aberta
-ws.addEventListener('open', function (event) {
-    console.log('Connected to WebSocket server');
-    statusMessage.textContent = "Conectado!";
-    sendButton.classList.remove('hidden');
-    sendButton.style.display = 'block'; // Garante que o botão será exibido
-});
-
-ws.onmessage = (event) => {
-    console.log('Message from server:', event.data);
+ws.onopen = () => {
+    statusMessage.textContent = 'Conectado!';
 };
-
-// Conexão Fechada
-ws.addEventListener('close', function (event) {
-    console.log('Disconnected from WebSocket server');
-    console.log('Code:', event.code, 'Reason:', event.reason);
-    statusMessage.textContent = "Desconectado.";
-    sendButton.classList.add('hidden');
-    sendButton.style.display = 'none'; // Oculta o botão
-});
 
 ws.onerror = (error) => {
+    statusMessage.textContent = 'Erro de conexão';
     console.error('WebSocket error:', error);
-    statusMessage.textContent = "Erro de conexão.";
 };
 
-sendButton.addEventListener('click', () => {
+ws.onclose = () => {
+    statusMessage.textContent = 'Conexão fechada';
+    sendButton.classList.add('hidden');
+    playerIdElement.classList.add('hidden');
+    connectedPlayersElement.classList.add('hidden');
+};
+
+ws.onmessage = (event) => {
+    const message = JSON.parse(event.data);
+    if (message.type === 'welcome') {
+        playerIdElement.textContent = `Seu ID: ${message.playerId}`;
+        connectedPlayersElement.textContent = `Jogadores Conectados: ${message.connectedPlayers}`;
+        playerIdElement.classList.remove('hidden');
+        connectedPlayersElement.classList.remove('hidden');
+        sendButton.classList.remove('hidden');
+    } else if (message.type === 'update') {
+        connectedPlayersElement.textContent = `Jogadores Conectados: ${message.connectedPlayers}`;
+    }
+};
+
+sendButton.onclick = () => {
     const message = {
-        userId: 'your_user_id', // Substitua 'your_user_id' pelo ID do usuário apropriado
-        commandType: 'signal'
+        userId: playerIdElement.textContent.split(' ')[2],
+        type: 'signal'
     };
     ws.send(JSON.stringify(message));
-    console.log('Sent:', message);
-});
+};
