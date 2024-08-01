@@ -19,12 +19,19 @@ async def server(ws, path):
         async for msg in ws:
             print("MSG DO CLIENTE: " + str(msg))
             for conn in connected:
-                if conn != ws:
-                    print("Enviada para o cliente: " + str(conn.remote_address))
-                    await conn.send(msg)
+                try:
+                    if conn != ws:
+                        print("Enviada para o cliente: " + str(conn.remote_address))
+                        await conn.send(msg)
 
-                    # Obter tipo de Pacote:
-                    # data = json.loads(str(msg))
+                        # Obter tipo de Pacote:
+                        # data = json.loads(str(msg))
+                except Exception as e:
+                        print(f"Erro ao enviar mensagem para {conn.remote_address}: {e}")
+                        
+    except Exception as e:
+        print(f"Erro na conexão com {ws.remote_address}: {e}")
+
     finally:
         # Unregister:
         connected.remove(ws)
@@ -32,9 +39,11 @@ async def server(ws, path):
 
 
 def main():
-    start_server = websockets.serve(server, "", 4999)
-    asyncio.get_event_loop().run_until_complete(start_server)
-    asyncio.get_event_loop().run_forever()
+    start_server = websockets.serve(server, "0.0.0.0", 10000)
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(start_server)
+    print("Servidor iniciado em ws://0.0.0.0:10000")
+    loop.run_forever()
 
 
 if __name__ == "__main__":
