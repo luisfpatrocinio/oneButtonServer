@@ -3,16 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebSocket Connection</title>
+    <title>Chicken Spotting Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <p id="statusMessage">Conectando...</p>
-        <button id="joinButton">Entrar no Jogo</button>
-        <p id="playerId" class="hidden"></p>
-        <p id="connectedPlayers" class="hidden"></p>
-        <button id="sendButton" class="hidden">Enviar Sinal</button>
+        <!-- Tela para colocar nome e botão para entrar no jogo -->
+        <div id="nameScreen" class="screen">
+            <h2>Insira seu Nome para Entrar no Jogo</h2>
+            <input type="text" id="playerName" placeholder="Seu Nome">
+            <button id="joinButton">Entrar no Jogo</button>
+        </div>
+
+        <!-- Tela para aguardar o jogo começar -->
+        <div id="waitForStartScreen" class="screen hidden">
+            <h2>Aguarde o jogo começar</h2>
+            <p>Conectando outros jogadores...</p>
+        </div>
+
+        <!-- Tela para aguardar passagem dos pintos -->
+        <div id="waitingScreen" class="screen hidden">
+            <h2>Preste atenção nos pintos!</h2>
+            <p>Aguarde...</p>
+        </div>
+
+        <!-- Tela para inserir palpite -->
+        <div id="guessScreen" class="screen hidden">
+            <h2>Insira seu palpite</h2>
+            <input type="number" id="guess" placeholder="Seu Palpite">
+            <button id="submitGuessButton">Enviar Palpite</button>
+        </div>
+
+        <!-- Tela de fim de jogo com botão para reiniciar página -->
+        <div id="endScreen" class="screen hidden">
+            <h2>Fim do Jogo</h2>
+            <p id="resultMessage"></p>
+            <button id="restartButton">Reiniciar Página</button>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>

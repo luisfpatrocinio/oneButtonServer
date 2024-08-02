@@ -1,0 +1,21 @@
+Lógica de Programação           1 semana
+Ferramenta de Desenvolvimento   2 semanas
+
+Trabalhando com GIT             1 semana
+Elaboração de GDD               1 semana
+
+Desenvolvimento do Projeto      3 semanas
+
+Exportação do Jogo              0.5 semanas
+Publicação do Jogo              0.5 semanas
+
+Elaboração de Post Mortem       1 semana
+
+
+
+
+-----
+
+
+
+modelo post Mortem
