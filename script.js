@@ -15,7 +15,7 @@ const restartButton = document.getElementById('restartButton');
 let playerId = null;
 let playerName = "";
 
-const ws = new WebSocket('wss://onebuttonserver.onrender.com:10000');
+const ws = new WebSocket('wss://onebuttonserver.onrender.com/:10000');
 // const ws = new WebSocket('ws://localhost:10000');
 
 ws.onopen = () => {
