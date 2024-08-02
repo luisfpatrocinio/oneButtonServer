@@ -7,6 +7,7 @@ const endScreen = document.getElementById('endScreen');
 const playerNameInput = document.getElementById('playerName');
 const joinButton = document.getElementById('joinButton');
 const guessInput = document.getElementById('guess');
+const incrementGuessButton = document.getElementById('incrementGuessButton');
 const submitGuessButton = document.getElementById('submitGuessButton');
 const resultMessage = document.getElementById('resultMessage');
 const restartButton = document.getElementById('restartButton');
@@ -14,8 +15,8 @@ const restartButton = document.getElementById('restartButton');
 let playerId = null;
 let playerName = "";
 
-// const ws = new WebSocket('wss://onebuttonserver.onrender.com:10000');
-const ws = new WebSocket('ws://localhost:10000');
+const ws = new WebSocket('wss://onebuttonserver.onrender.com:10000');
+// const ws = new WebSocket('ws://localhost:10000');
 
 ws.onopen = () => {
     console.log('Conectado ao servidor');
@@ -41,6 +42,8 @@ ws.onmessage = (event) => {
         setTimeout(() => {
             showScreen(guessScreen);
         }, 5000); // Ajuste o tempo conforme necessário
+    } else if (message.type === 'enableGuessing') {
+        submitGuessButton.classList.remove('hidden');
     } else if (message.type === 'gameResult') {
         resultMessage.textContent = message.result;
         showScreen(endScreen);
@@ -58,6 +61,11 @@ joinButton.onclick = () => {
         console.log('Enviando mensagem:', joinMessage);
         ws.send(JSON.stringify(joinMessage));
     }
+};
+
+incrementGuessButton.onclick = () => {
+    const currentGuess = parseInt(guessInput.value, 10) || 0;
+    guessInput.value = currentGuess + 1;
 };
 
 submitGuessButton.onclick = () => {

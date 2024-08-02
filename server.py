@@ -50,6 +50,16 @@ async def server(ws, path):
                 for conn in connected_clients:
                     await conn.send(json.dumps({"type": "startGuessing"}))
 
+            # Jogo permitirá que os jogadores enviem seus palpites.
+            elif message['type'] == 'enableGuessing':
+                for conn in connected_clients:
+                    await conn.send(json.dumps({"type": "enableGuessing"}))
+
+            # Jogo avisará quando a sessão acabar;.
+            elif message['type'] == 'gameResult':
+                for conn in connected_clients:
+                    await conn.send(json.dumps({"type": "gameResult", "result": message['result']}))
+
     except Exception as e:
         print(f"Erro na conexão com {ws.remote_address}: {e}")
     finally:
@@ -68,8 +78,8 @@ def process_guesses():
         return "Nenhum vencedor desta vez!"
 
 def main():
-    # start_server = websockets.serve(server, "0.0.0.0", 10000)
-    start_server = websockets.serve(server, "", 10000)
+    start_server = websockets.serve(server, "0.0.0.0", 10000)
+    # start_server = websockets.serve(server, "", 10000)
     loop = asyncio.get_event_loop()
     loop.run_until_complete(start_server)
     print("Servidor iniciado em ws://0.0.0.0:10000")
