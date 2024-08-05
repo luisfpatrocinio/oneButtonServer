@@ -8,8 +8,14 @@
 </head>
 <body>
     <div class="container">
+        <img src="chickenSpotting.png" alt="Chicken Spotting Game" class="title-image" style="width: 480px; height: auto;">
+        <!-- Tela de Carregamento -->
+         <div id="loadingScreen" class="screen">
+            <div id="loadingMsg" p class="welcome"> CONECTANDO-SE AO SERVIDOR </p> </div>
+        </div>
+
         <!-- Tela para colocar nome e botão para entrar no jogo -->
-        <div id="nameScreen" class="screen">
+        <div id="nameScreen" class="screen hidden">
             <h2>Insira seu Nome:</h2>
             <input type="text" id="playerName" placeholder="Seu Nome">
             <br>
@@ -24,15 +30,17 @@
 
         <!-- Tela para aguardar passagem dos pintos -->
         <div id="waitingScreen" class="screen hidden">
-            <h2>Preste atenção nos pintos!</h2>
-            <p>Aguarde...</p>
+            <h2>Conte os pintos amarelos e ignore os pinguins!</h2>
+            <div id = "waitMsg"><p>Aguarde...</p></div>
         </div>
 
         <!-- Tela para inserir palpite -->
         <div id="guessScreen" class="screen hidden">
-            <h2>Insira seu palpite</h2>
+            <h2>Conte os pintinhos amarelos!</h2>
             <input type="number" id="guess" placeholder="Seu Palpite">
-            <button id="incrementGuessButton">Incrementar</button>
+            <br>
+            <button id="incrementGuessButton">CONTAR</button>
+            <br>
             <button id="submitGuessButton" class="hidden">Enviar Palpite</button>
         </div>
 
@@ -42,7 +50,23 @@
             <p id="resultMessage"></p>
             <button id="restartButton">Reiniciar Página</button>
         </div>
+
+        <!-- Exibir logo do Labiras e rodapé -->
+        <div id="footer">
+            <p>Desenvolvido por Luis Felipe Patrocinio</p>
+            <a href="https://patrocinioluisf.itch.io">
+                <img src="https://img.shields.io/badge/Itch.io-FA5C5C?style=for-the-badge&logo=itchdotio&logoColor=white" alt="Itch.io"/>
+            </a>
+            <a href="https://github.com/luisfpatrocinio/">
+                <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="Github"/>
+            </a>
+            <br>
+            
+            <img src="labirasLogo.png" alt="Labiras" style="width: 100px; height: auto;">
+        </div>
     </div>
+    <audio id="incrementSound" src="coin.wav"></audio>
+    <audio id="submitSound" src="submit.wav"></audio>
     <script src="script.js"></script>
 </body>
 </html>

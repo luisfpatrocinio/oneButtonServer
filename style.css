@@ -3,6 +3,13 @@
     display: none;
 }
 
+/* Título */
+h1 {
+    color: #ff9900;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
 /* Container centralizado com margem superior */
 .container {
     text-align: center;
@@ -12,6 +19,7 @@
 
 /* Tela com margem superior */
 .screen {
+    color: #ffffff;
     margin-top: 20px;
 }
 
@@ -31,7 +39,7 @@ input {
 button {
     padding: 50px 50px;
     font-size: 16px;
-    background-color: #4CAF50;
+    background-color: #ff8100;
     color: white;
     border: none;
     border-radius: 18px;
@@ -46,29 +54,50 @@ button:disabled {
     color: #666666;
 }
 
+/* Botão desativado caso não haja texto escrito */
+button:disabled:hover {
+    background-color: #bbbbbb;
+    color: #666666;
+}
+
 /* Cor de fundo do botão ao passar o mouse */
 button:hover {
-    background-color: #45a049;
+    background-color: #ff0000;
 }
 
 /* Estilização dos títulos */
 h2 {
-    color: #333;
+    color: #fdff9f;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.loadingScreen {
+    color: #ff0000;
     font-size: 24px;
     margin-bottom: 20px;
 }
 
 /* Estilização dos parágrafos */
 p {
-    color: #555;
+    color: #ffffff;
     font-size: 18px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 
 /* Background e fonte da página */
 body {
-    background-color: #f0f0f0;
+    background-color: #060606;
+    background: url('background.png') no-repeat center center fixed;
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
+}
+
+/* Estilização do rodapé */
+.footer {
+    color: #ff9900;
+    font-size: 54px;
+    text-align: center;
+    margin-top: 50px;
 }

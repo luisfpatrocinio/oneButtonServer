@@ -3,6 +3,7 @@ const waitForStartScreen = document.getElementById('waitForStartScreen');
 const waitingScreen = document.getElementById('waitingScreen');
 const guessScreen = document.getElementById('guessScreen');
 const endScreen = document.getElementById('endScreen');
+const loadingScreen = document.getElementById('loadingScreen');
 
 const playerNameInput = document.getElementById('playerName');
 const joinButton = document.getElementById('joinButton');
@@ -11,6 +12,10 @@ const incrementGuessButton = document.getElementById('incrementGuessButton');
 const submitGuessButton = document.getElementById('submitGuessButton');
 const resultMessage = document.getElementById('resultMessage');
 const restartButton = document.getElementById('restartButton');
+
+const incrementSound = document.getElementById('incrementSound');
+const submitSound = document.getElementById('submitSound');
+
 
 let playerId = null;
 let playerName = "";
@@ -21,6 +26,9 @@ const ws = new WebSocket('wss://onebuttonserver.onrender.com/:10000');
 
 ws.onopen = () => {
     console.log('Conectado ao servidor');
+    showScreen(nameScreen);
+    var _joinButton = document.getElementById("joinButton");
+    _joinButton.disabled = true;
 };
 
 ws.onerror = (error) => {
@@ -48,6 +56,7 @@ ws.onmessage = (event) => {
     } else if (message.type === 'gameResult') {
         resultMessage.textContent = message.result;
         showScreen(endScreen);
+        footer.classList.remove('hidden');
     }
 };
 
@@ -64,13 +73,14 @@ joinButton.onclick = () => {
     
         nameScreen.classList.add('hidden');
         waitForStartScreen.classList.remove('hidden');
-        
+        footer.classList.add('hidden');
     }
 };
 
 incrementGuessButton.onclick = () => {
     const currentGuess = parseInt(guessInput.value, 10) || 0;
     guessInput.value = currentGuess + 1;
+    incrementSound.play();
 };
 
 submitGuessButton.onclick = () => {
@@ -83,6 +93,7 @@ submitGuessButton.onclick = () => {
         };
         ws.send(JSON.stringify(guessMessage));
         showScreen(waitingScreen); // Volta para a tela de espera após enviar o palpite
+        submitSound.play();
     }
 };
 
@@ -96,6 +107,7 @@ function showScreen(screen) {
     waitingScreen.classList.add('hidden');
     guessScreen.classList.add('hidden');
     endScreen.classList.add('hidden');
+    loadingScreen.classList.add('hidden');
     screen.classList.remove('hidden');
 }
 
@@ -103,6 +115,12 @@ setInterval(function() {
     pointsNumber = (pointsNumber + 1) % 4;
     var _msg = document.getElementById("connectingMsg");
     _msg.textContent = "Conectando outros jogadores" + ".".repeat(pointsNumber);
+
+    var _loading = document.getElementById("loadingMsg");
+    _loading.textContent = "CONECTANDO-SE AO SERVIDOR" + ".".repeat(pointsNumber);
+
+    var _waitMsg = document.getElementById("waitMsg");
+    _waitMsg.textContent = "Aguarde" + ".".repeat(pointsNumber);
 }, 500);
 
 var _playerName = document.getElementById("playerName");
