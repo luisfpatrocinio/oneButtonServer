@@ -35,7 +35,7 @@ ws.onmessage = (event) => {
     console.log("Mensagem recebida", message);
     if (message.type === 'joined') {
         playerId = message.playerId;
-        showScreen(waitForStartScreen);
+        // showScreen(waitForStartScreen);
     } else if (message.type === 'startGuessing') {
         console.log("STARTING GUESSING");
         showScreen(waitingScreen);
@@ -60,6 +60,9 @@ joinButton.onclick = () => {
         
         console.log('Enviando mensagem:', joinMessage);
         ws.send(JSON.stringify(joinMessage));
+        
+        playerId = message.playerId;
+        showScreen(waitForStartScreen)
     }
 };
 
