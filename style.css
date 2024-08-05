@@ -26,15 +26,11 @@
     margin-top: 20px;
 }
 
-<<<<<<< HEAD
 /* Estilização dos inputs */
-=======
->>>>>>> 16c186500baae4ee4498ae495826f6d9dc5510f1
 input {
     padding: 10px;
     font-size: 16px;
     margin-bottom: 10px;
-<<<<<<< HEAD
     border: 2px solid #ccc;
     border-radius: 5px;
     width: calc(100% - 24px); /* Full width menos padding */
@@ -80,11 +76,4 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-=======
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 16px;
->>>>>>> 16c186500baae4ee4498ae495826f6d9dc5510f1
 }
