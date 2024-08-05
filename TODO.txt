@@ -1,0 +1,17 @@
+Vamos mudar a abordagem do jogo, para suportar diversos jogadores em página de internet.
+O jogo vai mostrar um QR Code, e esperar N conexões.
+Ao ser feita pelo menos N conexões, iniciará uma contagem para ir para a tela do jogo.
+Após a passagem dos pintos, haverá um tempo para os jogadores fazerem seus palpites.
+Após o tempo do palpite, mostrar o resultado, e em seguida mostrar os nomes dos jogadores vencedores.
+
+Na tela do celular:
+O jogador iniciará colocando seu nome. 
+Esse nome será enviado ao servidor para identificar que um jogador tentou entrar.
+Enquanto os pintos passam, no celular deverá mostrar que ele deverá prestar atenção nos pintos.
+Essa tela deverá ser atualizada para abrir um campo para inserir o palpite.
+
+Página de Internet:
+• Tela para colocar nome e botão para entrar no jogo.
+• Tela para aguardar passagem dos pintos.
+• Tela para inserir palpite.
+• Tela de fim de jogo com botão para reiniciar página.
