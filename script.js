@@ -60,9 +60,9 @@ joinButton.onclick = () => {
         
         console.log('Enviando mensagem:', joinMessage);
         ws.send(JSON.stringify(joinMessage));
-        
-        playerId = message.playerId;
-        showScreen(waitForStartScreen)
+    
+        nameScreen.classList.add('hidden');
+        waitForStartScreen.classList.remove('hidden');
     }
 };
 
