@@ -25,9 +25,13 @@ async def server(ws, path):
                 # await ws.send()
 
                 for conn in connected_clients:
+<<<<<<< HEAD
                     # Mandar essa mensagem apenas para quem mandou o join
                     if conn == ws:
                         await conn.send(json.dumps({"type": "joined", "playerName": message['playerName'], "playerId": player_id}))
+=======
+                    await conn.send(json.dumps({"type": "joined", "playerName": message['playerName']}))
+>>>>>>> 16c186500baae4ee4498ae495826f6d9dc5510f1
 
                 # if len(connected_clients) >= N:
                 #     start_guessing_message = json.dumps({"type": "startGuessing"})
