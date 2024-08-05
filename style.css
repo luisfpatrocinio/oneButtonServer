@@ -1,79 +1,23 @@
-<<<<<<< HEAD
-/* Esconde elementos com a classe hidden */
-=======
->>>>>>> 16c186500baae4ee4498ae495826f6d9dc5510f1
 .hidden {
     display: none;
 }
 
-<<<<<<< HEAD
-/* Container centralizado com margem superior */
-.container {
-    text-align: center;
-    margin-top: 50px;
-    font-family: 'Arial', sans-serif;
-}
-
-/* Tela com margem superior */
-=======
 .container {
     text-align: center;
     margin-top: 50px;
 }
 
->>>>>>> 16c186500baae4ee4498ae495826f6d9dc5510f1
 .screen {
     margin-top: 20px;
 }
 
-/* Estilização dos inputs */
 input {
     padding: 10px;
     font-size: 16px;
     margin-bottom: 10px;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    width: calc(100% - 24px); /* Full width menos padding */
-    max-width: 300px;
-    box-sizing: border-box;
 }
 
-/* Estilização dos botões */
 button {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin: 5px;
-}
-
-/* Cor de fundo do botão ao passar o mouse */
-button:hover {
-    background-color: #45a049;
-}
-
-/* Estilização dos títulos */
-h2 {
-    color: #333;
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-/* Estilização dos parágrafos */
-p {
-    color: #555;
-    font-size: 18px;
-    margin-bottom: 20px;
-}
-
-/* Background e fonte da página */
-body {
-    background-color: #f0f0f0;
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
 }
