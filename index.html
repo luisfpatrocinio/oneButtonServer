@@ -10,20 +10,21 @@
     <div class="container">
         <!-- Tela para colocar nome e botão para entrar no jogo -->
         <div id="nameScreen" class="screen">
-            <h2>Insira seu Nome para Entrar no Jogo</h2>
+            <h2>Insira seu Nome:</h2>
             <input type="text" id="playerName" placeholder="Seu Nome">
+            <br>
             <button id="joinButton">Entrar no Jogo</button>
         </div>
 
         <!-- Tela para aguardar o jogo começar -->
         <div id="waitForStartScreen" class="screen hidden">
             <h2>Aguarde o jogo começar</h2>
-            <p>Conectando outros jogadores...</p>
+            <div id="connectingMsg"><p>Conectando outros jogadores...</p></div>
         </div>
 
         <!-- Tela para aguardar passagem dos pintos -->
         <div id="waitingScreen" class="screen hidden">
-            <h2>Palpite enviado!</h2>
+            <h2>Preste atenção nos pintos!</h2>
             <p>Aguarde...</p>
         </div>
 

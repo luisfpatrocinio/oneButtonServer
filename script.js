@@ -14,6 +14,7 @@ const restartButton = document.getElementById('restartButton');
 
 let playerId = null;
 let playerName = "";
+let pointsNumber = 0;
 
 const ws = new WebSocket('wss://onebuttonserver.onrender.com/:10000');
 // const ws = new WebSocket('ws://localhost:10000');
@@ -63,6 +64,7 @@ joinButton.onclick = () => {
     
         nameScreen.classList.add('hidden');
         waitForStartScreen.classList.remove('hidden');
+        
     }
 };
 
@@ -95,4 +97,22 @@ function showScreen(screen) {
     guessScreen.classList.add('hidden');
     endScreen.classList.add('hidden');
     screen.classList.remove('hidden');
+}
+
+setInterval(function() {
+    pointsNumber = (pointsNumber + 1) % 4;
+    var _msg = document.getElementById("connectingMsg");
+    _msg.textContent = "Conectando outros jogadores" + ".".repeat(pointsNumber);
+}, 500);
+
+var _playerName = document.getElementById("playerName");
+var _joinButton = document.getElementById("joinButton");
+// Mudar estilo do botão se não houver texto   
+_playerName.oninput = function() {
+    if (_playerName.value.trim() === "") {
+        // Botão ficará desativado
+        _joinButton.disabled = true;
+    } else {
+        _joinButton.disabled = false;
+    }
 }
