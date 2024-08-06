@@ -57,6 +57,8 @@ ws.onmessage = (event) => {
         resultMessage.textContent = message.result;
         showScreen(endScreen);
         footer.classList.remove('hidden');
+    } else if (message.type === "disableGuessing") {
+        submitGuess();
     }
 };
 
@@ -74,16 +76,23 @@ joinButton.onclick = () => {
         nameScreen.classList.add('hidden');
         waitForStartScreen.classList.remove('hidden');
         footer.classList.add('hidden');
+
+        submitSound.play();
     }
 };
 
 incrementGuessButton.onclick = () => {
     const currentGuess = parseInt(guessInput.value, 10) || 0;
     guessInput.value = currentGuess + 1;
+    if (incrementSound.paused) {
+        incrementSound.pause();
+    } else {
+        incrementSound.currentTime = 0;
+    }
     incrementSound.play();
 };
 
-submitGuessButton.onclick = () => {
+function submitGuess() {
     const guess = guessInput.value.trim();
     if (guess) {
         const guessMessage = {
@@ -95,7 +104,9 @@ submitGuessButton.onclick = () => {
         showScreen(waitingScreen); // Volta para a tela de espera após enviar o palpite
         submitSound.play();
     }
-};
+}
+
+submitGuessButton.onclick = submitGuess;
 
 restartButton.onclick = () => {
     location.reload();

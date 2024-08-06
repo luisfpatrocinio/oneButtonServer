@@ -62,6 +62,11 @@ async def server(ws, path):
                 for conn in connected_clients:
                     await conn.send(json.dumps({"type": "gameResult", "result": message['result']}))
 
+            # Jogo avisará quando a sessão acabar;.
+            elif message['type'] == 'disableGuessing':
+                for conn in connected_clients:
+                    await conn.send(json.dumps({"type": "disableGuessing"}))
+
     except Exception as e:
         print(f"Erro na conexão com {ws.remote_address}: {e}")
     finally:
